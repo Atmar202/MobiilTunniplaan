@@ -2,4 +2,4 @@
 # Töövahendid:
 Android Studio
 # Ülesande Püstitus
-Loome rakenduse android studios valmis, kus me lisame vajalikud failid/komponendid.
+Tahame näha enda tunniplaane enda telefonist
