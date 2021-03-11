@@ -16,23 +16,4 @@ Nupu vajutusel viib teise activity, kus on andmed, mis on saadud läbi andmebaas
 On olemas ka back nupp, mis viib tagasi esimesse activity ja muudatuste nupp, mis viib kolmandasse activity.
 Kolmas activity näitab sellel nädalal olevaid tunniplaani muudatusi (Päev: tund ja aine) ning samuti on olemas ka eelistusnupp, mida saab välja või sisse lülitada, et saada teateid selle rühma tunniplaani muudatustest. Samuti on olemas ka back nupp, mis viib tagasi eelmisse activity.
 # Tööplaan
-# 1 Nädal:
-3 Tundi | Loob projekti ja activity'id. | Noole
-3 Tundi | Loob andmebaasi ja ühendab selle SQLLite'iga. | Peeduli
-4 Tundi | Loob kujunduse valmis. | Rauno
-1 Tundi | Projekti testimine ja märkmete tegemine. | Noole
-# 2 Nädal:
-3 Tundi | Esimese activity koodi kirjutamine. | Peeduli
-4 Tundi | Esimese activity koodi täiendamine/errorite kõrvaldamine | Noole, Rauno
-1 Tundi | Alustab teise activity koodi kirjutamisega. | Peeduli
-1 Tundi | Projekti testimine ja märkmete tegemine. | Peeduli
-# 3 Nädal:
-3 Tundi | Loob seose andmebaasiga koos activity'itega, et päringuid oleks näha läbi andmebaasi ning kujunduse teisele activity'ile | Rauno
-3 Tundi | Lõpetab teise activity koodi kirjutamise. | Peeduli
-3 Tundi | Täiendab teise activity koodi/kõrvaldab erroreid | Noole
-1 Tundi | Projekti testimine ja märkmete tegemine. | Rauno
-# 4 Nädal:
-5 Tundi | Kolmanda activity koodi kirjutamine ja errorite kõrvaldamine esimeses ja teises activity'is | Peeduli
-3 Tundi | Kolmanda activity täiendamine ja kujunduse loomine | Peeduli, Rauno
-1 Tundi | Projekti testimine ja märkmete tegemine. | Noole, Rauno
-4 Tundi | Dokumentide vormistamine ja kokkuvõte | Peeduli, Rauno, Noole
+![589ee2628d1d102ceff0a47d1db2f132](https://user-images.githubusercontent.com/71074700/110799453-d7560e80-8283-11eb-93b9-a61856b65af3.png)
