@@ -12,14 +12,13 @@
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/groupText"
+        android:text="@string/aine"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toStartOf="@+id/Info2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day"
-        tools:text="@string/aine" />
+        app:layout_constraintTop_toBottomOf="@+id/day" />
 
     <TextView
         android:id="@+id/Info2"
@@ -30,7 +29,7 @@
         android:text="@string/groupInfo"
         android:textAlignment="viewEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Info1"
         app:layout_constraintTop_toBottomOf="@+id/day" />
@@ -45,7 +44,7 @@
         android:text="@string/groupText"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000000"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

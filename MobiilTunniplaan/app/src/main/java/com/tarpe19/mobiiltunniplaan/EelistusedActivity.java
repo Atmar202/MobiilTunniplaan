@@ -18,6 +18,10 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
     Switch notifications;
     Spinner spinner;
 
+    /*
+    TODO: SHARED PREFERENCES, salvestada väärtused (Switch state ja Spinner selection)
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +53,6 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
             }
         });
     }
-    // Switchi jaoks teha alertdialog
 
     public void onBack(View view) {
         onBackPressed();
@@ -57,11 +60,9 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        // Some text are still black when under dark theme (issue with text decoration)
-        // Dark theme
         if(position > 0){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } // Light theme
+        }
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }

@@ -3,6 +3,7 @@ package com.tarpe19.mobiiltunniplaan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 public class TunniplaanActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    TextView aineInfo, klassiInfo;
+    TextView aineInfo, klassiInfo, groupHeader;
     String selectionText;
     Spinner spinner1, spinner2;
 
@@ -21,6 +22,7 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tunniplaan);
 
+        groupHeader = findViewById(R.id.groupHeader);
         aineInfo = findViewById(R.id.SubjectText);
         klassiInfo = findViewById(R.id.InfoText);
         spinner1 = findViewById(R.id.date);
@@ -39,6 +41,9 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
 
         Intent intent = getIntent();
         selectionText = intent.getStringExtra("STRING");
+        Resources res = getResources();
+        String text = res.getString(R.string.groupText, selectionText);
+        groupHeader.setText(text);
     }
 
     // Viib tagasi eelmisse activitysse

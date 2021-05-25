@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         btn = findViewById(R.id.search);
         groupName = findViewById(R.id.enterGroup);
         spinner = findViewById(R.id.chooseGroup);
@@ -40,24 +39,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         // Prioriseerib rohkem spinneri valikut, kui sisestust
         btn.setOnClickListener(view1 -> {
+            // Salvestada spinner selection ja selle kaudu leida selle rühma andmed
+            String selectionText = spinner.getSelectedItem().toString();
+            String group = groupName.getText().toString();
+            // TODO: Kui sisestada gruppi nime, siis see otsib kas see on võrdne selection tekstiga
+            // Töötab ainult hetkelise selectioniga, ehk siis kui selection on vali rühm, siis seda otsing leiab
+            // Teha foreach loop mis otsib seda sõna mida vaja
+            // https://stackoverflow.com/questions/32127374/android-how-to-get-all-items-in-a-spinner
+            /*
+            if(group.equalsIgnoreCase(selectionText)){
+                Toast.makeText(MainActivity.this, "Rühm on leitud.", Toast.LENGTH_SHORT).show();
+            }
+            */
             if(position > 0){
-                // Salvestada spinner selection ja selle kaudu leida selle rühma andmed
-                String selectionText = spinner.getSelectedItem().toString();
                 // Viib järgmissesse activityisse ja salvestab selectioni
                 Intent newActivity = new Intent(MainActivity.this, TunniplaanActivity.class);
                 newActivity.putExtra("STRING", selectionText);
                 startActivity(newActivity);
             } else {
-                // Proovib leida päringut, kuid kui ei leia siis tagastab SQL errori
-                String group = groupName.getText().toString();
-                if(!group.equals("")){
-                    // Viib järgmisesse activityisse
-                    Intent newActivity = new Intent(MainActivity.this, TunniplaanActivity.class);
-                    startActivity(newActivity);
-                    // TODO: Kasutab andmebaasi (SQLLite, et töötleda käsitisi kirjutatud päringud)
-                } else {
-                    Toast.makeText(MainActivity.this, "Unable to find the group when both values are empty.", Toast.LENGTH_SHORT).show();
-                }
+                    Toast.makeText(MainActivity.this, "Ei leia rühma.", Toast.LENGTH_SHORT).show();
             }
         });
     }
