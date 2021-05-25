@@ -1,0 +1,2 @@
+rootProject.name = "Mobiil Tunniplaan"
+include ':app'

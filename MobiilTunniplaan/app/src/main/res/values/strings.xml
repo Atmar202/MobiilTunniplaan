@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Mobiil Tunniplaan</string>
+    <string name="siseta">Sisesta rühm</string>
+    <string name="otsi">otsi</string>
+    <string name="groupText">{Rühm} Tunniplaan</string>
+    <string name="aine">Aine</string>
+    <string name="groupInfo">Klass / Õpetaja</string>
+    <string name="AineInfo" />
+    <string name="KlassInfo" />
+    <string name="tagasi">tagasi</string>
+    <string name="muudatused">muudatused</string>
+    <string name="groupInfo2">Klass / Muudatused</string>
+    <string name="eelistused">eelistused</string>
+    <string name="groupChanges">Tunniplaani Muudatused</string>
+    <string name="notificationsText">Märguanded</string>
+    <string name="uitext">UI Vaade</string>
+    <string-array name="DateDropdownText">
+        <item>17.05-23.05</item>
+        <item>24.05-30.05</item>
+        <item>31.05-06.06</item>
+        <item>07.06-13.06</item>
+        <item>14.06-20.06</item>
+    </string-array>
+    <string-array name="DayDropdownText">
+        <item>Esmaspäev</item>
+        <item>Teisipäev</item>
+        <item>Kolmapäev</item>
+        <item>Neljapäev</item>
+        <item>Reede</item>
+    </string-array>
+    <string-array name="UIDropdownText">
+        <item>Light theme</item>
+        <item>Black theme</item>
+    </string-array>
+    <string-array name="chooseGroup">
+        <item>Vali rühm:</item>
+        <item>TARpe19</item>
+    </string-array>
+</resources>
