@@ -12,11 +12,16 @@ import android.widget.Spinner;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText groupName;
     Spinner spinner;
     Button btn;
+    int count;
+    List<String> spinnerItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 R.array.chooseGroup, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        count = spinner.getAdapter().getCount();
+        spinnerItems = new ArrayList<String>();
+        for(int i = 0; i < count; i++) {
+            String text = spinner.getAdapter().getItem(i).toString();
+            spinnerItems.add(text);
+        }
     }
     // Vaata kas groupName sisaldab andmebaasis olevat päringut (TARpe19), kui mitte siis tagastada error
     // Võib kasutada lihtsat andmebaasi nagu nt: SQL Lite (Näitab staatilisi andmeid, mis ei sobi kui on vaja salvestada palju andmeid)
@@ -42,22 +53,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // Salvestada spinner selection ja selle kaudu leida selle rühma andmed
             String selectionText = spinner.getSelectedItem().toString();
             String group = groupName.getText().toString();
-            // TODO: Kui sisestada gruppi nime, siis see otsib kas see on võrdne selection tekstiga
-            // Töötab ainult hetkelise selectioniga, ehk siis kui selection on vali rühm, siis seda otsing leiab
-            // Teha foreach loop mis otsib seda sõna mida vaja
-            // https://stackoverflow.com/questions/32127374/android-how-to-get-all-items-in-a-spinner
-            /*
-            if(group.equalsIgnoreCase(selectionText)){
-                Toast.makeText(MainActivity.this, "Rühm on leitud.", Toast.LENGTH_SHORT).show();
-            }
-            */
             if(position > 0){
                 // Viib järgmissesse activityisse ja salvestab selectioni
                 Intent newActivity = new Intent(MainActivity.this, TunniplaanActivity.class);
                 newActivity.putExtra("STRING", selectionText);
                 startActivity(newActivity);
             } else {
-                    Toast.makeText(MainActivity.this, "Ei leia rühma.", Toast.LENGTH_SHORT).show();
+                for (int i = 1; i < spinnerItems.size(); i++) {
+                    if (group.equalsIgnoreCase(spinnerItems.get(i))) {
+                        Intent newActivity = new Intent(MainActivity.this, TunniplaanActivity.class);
+                        newActivity.putExtra("STRING", spinnerItems.get(i));
+                        startActivity(newActivity);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Ei leia rühma.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }

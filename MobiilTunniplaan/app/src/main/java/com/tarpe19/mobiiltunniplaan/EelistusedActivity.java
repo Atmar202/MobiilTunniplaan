@@ -1,11 +1,15 @@
 package com.tarpe19.mobiiltunniplaan;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,12 +19,12 @@ import android.widget.Switch;
 
 public class EelistusedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch notifications;
     Spinner spinner;
-
-    /*
-    TODO: SHARED PREFERENCES, salvestada väärtused (Switch state ja Spinner selection)
-     */
+    int spinnerPos;
+    public static final String SPINNER = "spinner";
+    public static final String SWITCH = "switch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,11 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
                 R.array.UIDropdownText, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        // TODO: SHAREDPREFERENCES ON PAIGAS, KUID EI TÖÖTA
+        if(savedInstanceState != null){
+            spinner.setSelection(savedInstanceState.getInt(SPINNER));
+            notifications.setChecked(savedInstanceState.getBoolean(SWITCH));
+        }
         notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -54,6 +63,12 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
         });
     }
 
+    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(SPINNER, spinnerPos);
+        savedInstanceState.putBoolean(SWITCH, notifications.isChecked());
+    }
+
     public void onBack(View view) {
         onBackPressed();
     }
@@ -66,6 +81,7 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+        spinnerPos = position;
     }
 
     @Override
