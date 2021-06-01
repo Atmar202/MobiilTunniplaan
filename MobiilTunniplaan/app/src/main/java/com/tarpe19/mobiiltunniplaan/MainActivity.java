@@ -1,16 +1,18 @@
 package com.tarpe19.mobiiltunniplaan;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     EditText groupName;
     Spinner spinner;
     Button btn;
-    int count;
+    int count, backgroundValue;
     List<String> spinnerItems;
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         for(int i = 0; i < count; i++) {
             String text = spinner.getAdapter().getItem(i).toString();
             spinnerItems.add(text);
+        }
+        mPrefs = getSharedPreferences("com.tarpe19.mobiiltunniplaan",MODE_PRIVATE);
+        backgroundValue = mPrefs.getInt("spinner_pos",0);
+        if(backgroundValue > 0){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
     }
     // Vaata kas groupName sisaldab andmebaasis olevat päringut (TARpe19), kui mitte siis tagastada error

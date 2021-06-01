@@ -1,15 +1,10 @@
 package com.tarpe19.mobiiltunniplaan;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,18 +12,21 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class EelistusedActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch notifications;
     Spinner spinner;
-    int spinnerPos;
-    public static final String SPINNER = "spinner";
-    public static final String SWITCH = "switch";
+    private SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPrefs = getSharedPreferences("com.tarpe19.mobiiltunniplaan",MODE_PRIVATE);
         setContentView(R.layout.activity_eelistused);
         spinner = findViewById(R.id.UIDropdown);
         notifications = findViewById(R.id.notificationsSwitch);
@@ -37,18 +35,15 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
                 R.array.UIDropdownText, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        // TODO: SHAREDPREFERENCES ON PAIGAS, KUID EI TÖÖTA
-        if(savedInstanceState != null){
-            spinner.setSelection(savedInstanceState.getInt(SPINNER));
-            notifications.setChecked(savedInstanceState.getBoolean(SWITCH));
-        }
+        spinner.setSelection(mPrefs.getInt("spinner_pos",0));
+        notifications.setChecked(mPrefs.getBoolean("switch_state", false));
         notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
                     new AlertDialog.Builder(EelistusedActivity.this)
-                            .setTitle("Allow notifications")
-                            .setMessage("Are you sure you want to receive notifications from this group changes?")
+                            .setTitle("Luba märguanded")
+                            .setMessage("Oled kindel, et soovid märguandeid selle rühma tulevatest tunniplaani muudatustest?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // Continue
@@ -63,10 +58,13 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
         });
     }
 
-    protected void onSaveInstanceState(@NonNull Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(SPINNER, spinnerPos);
-        savedInstanceState.putBoolean(SWITCH, notifications.isChecked());
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor ed = mPrefs.edit();
+        ed.putInt("spinner_pos", spinner.getSelectedItemPosition());
+        ed.putBoolean("switch_state", notifications.isChecked());
+        ed.apply();
     }
 
     public void onBack(View view) {
@@ -81,7 +79,6 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-        spinnerPos = position;
     }
 
     @Override

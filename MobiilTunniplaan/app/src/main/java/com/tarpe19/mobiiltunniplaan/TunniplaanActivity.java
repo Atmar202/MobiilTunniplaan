@@ -37,8 +37,6 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
                 R.array.DayDropdownText, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
-        // selection valimisel võiks info refreshida automaatselt, kuid kui see ei õnnestu, siis võib lisada nupu
-
         Intent intent = getIntent();
         selectionText = intent.getStringExtra("STRING");
         Resources res = getResources();
