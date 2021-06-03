@@ -19,7 +19,6 @@ public class MuudatusedActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_muudatused);
-
         aineInfo = findViewById(R.id.SubjectText);
         klassiInfo = findViewById(R.id.InfoText);
         spinner1 = findViewById(R.id.date);
@@ -34,7 +33,6 @@ public class MuudatusedActivity extends AppCompatActivity implements AdapterView
                 R.array.DayDropdownText, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
-        // selection valimisel võiks info refreshida automaatselt, kuid kui see ei õnnestu, siis võib lisada nupu
     }
 
     public void onBack(View view) {
@@ -48,7 +46,20 @@ public class MuudatusedActivity extends AppCompatActivity implements AdapterView
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-
+        // Find correct date (that case: 17.05-23.05)
+        if (spinner1.getSelectedItemPosition() == 0) {
+            // Day - Monday (17.05)
+            if (spinner2.getSelectedItemPosition() == 0) {
+                aineInfo.setText("Võrgurakendused");
+                klassiInfo.setText("A236 / Lähevad kell 14:00");
+            } else {
+                aineInfo.setText("");
+                klassiInfo.setText("");
+            }
+        } else {
+            aineInfo.setText("");
+            klassiInfo.setText("");
+        }
     }
 
     @Override
