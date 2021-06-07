@@ -1,16 +1,14 @@
 package com.tarpe19.mobiiltunniplaan;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,23 +35,15 @@ public class EelistusedActivity extends AppCompatActivity implements AdapterView
         spinner.setAdapter(adapter);
         spinner.setSelection(mPrefs.getInt("spinner_pos",0));
         notifications.setChecked(mPrefs.getBoolean("switch_state", false));
-        notifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
-                    new AlertDialog.Builder(EelistusedActivity.this)
-                            .setTitle("Luba märguanded")
-                            .setMessage("Oled kindel, et soovid märguandeid selle rühma tulevatest tunniplaani muudatustest?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue
-                                }
-                            }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            notifications.setChecked(false);
-                        }}).setIcon(android.R.drawable.ic_dialog_alert).show();
-                }
+        notifications.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if(isChecked) {
+                new AlertDialog.Builder(EelistusedActivity.this)
+                        .setTitle("Luba märguanded")
+                        .setMessage("Oled kindel, et soovid märguandeid selle rühma tulevatest tunniplaani muudatustest?")
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> Toast.makeText(EelistusedActivity.this, "Märguanded on sisse lülitatud.", Toast.LENGTH_SHORT).show()).setNegativeButton(android.R.string.no,
+                        (dialogInterface, i) -> notifications.setChecked(false)).setIcon(android.R.drawable.ic_dialog_alert).show();
+            } else {
+                Toast.makeText(EelistusedActivity.this, "Märguanded on välja lülitatud.", Toast.LENGTH_SHORT).show();
             }
         });
     }

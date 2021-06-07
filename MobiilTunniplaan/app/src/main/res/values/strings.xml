@@ -4,13 +4,13 @@
     <string name="otsi">otsi</string>
     <string name="groupText">%1$s Tunniplaan</string>
     <string name="aine">Aine</string>
-    <string name="aine2">Aine / Klass</string>
+    <string name="aine2">Aine</string>
     <string name="groupInfo">Klass / Õpetaja</string>
     <string name="AineInfo" />
     <string name="KlassInfo" />
     <string name="tagasi">tagasi</string>
     <string name="muudatused">muudatused</string>
-    <string name="groupInfo2">Muudatused</string>
+    <string name="groupInfo2">Klass / Muudatused</string>
     <string name="eelistused">eelistused</string>
     <string name="groupChanges">Tunniplaani Muudatused</string>
     <string name="notificationsText">Märguanded</string>

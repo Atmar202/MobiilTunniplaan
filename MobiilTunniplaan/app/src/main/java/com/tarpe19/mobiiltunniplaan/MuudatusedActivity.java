@@ -2,6 +2,7 @@ package com.tarpe19.mobiiltunniplaan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,21 +45,50 @@ public class MuudatusedActivity extends AppCompatActivity implements AdapterView
         startActivity(newActivity);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
         // Find correct date (that case: 17.05-23.05)
-        if (spinner1.getSelectedItemPosition() == 0) {
+        switch(spinner1.getSelectedItemPosition()){
             // Day - Monday (17.05)
-            if (spinner2.getSelectedItemPosition() == 0) {
-                aineInfo.setText("Võrgurakendused");
-                klassiInfo.setText("A236 / Lähevad kell 14:00");
-            } else {
+        case 0:
+            switch(spinner2.getSelectedItemPosition()) {
+                case 0:
+                    aineInfo.setText("Võrgurakendused");
+                    klassiInfo.setText("A236 / Lähevad kell 14:00");
+                    break;
+                case 2:
+                case 4:
+                    aineInfo.setText("Andmebaasi\nsüsteemide alused");
+                    klassiInfo.setText("A116 / Jääb ära; iseseisev töö kodus");
+                    break;
+                default:
+                    aineInfo.setText("");
+                    klassiInfo.setText("");
+                    break;
+            }
+            break;
+            case 1:
+                switch(spinner2.getSelectedItemPosition()) {
+                    case 2:
+                    case 4:
+                        aineInfo.setText("Andmebaasi\nsüsteemide alused");
+                        klassiInfo.setText("A116 / Jääb ära; iseseisev töö kodus");
+                        break;
+                    default:
+                        aineInfo.setText("");
+                        klassiInfo.setText("");
+                        break;
+                }
+                break;
+            case 4:
+                aineInfo.setText("-");
+                klassiInfo.setText("Konsultatsiooni nädal");
+                break;
+            default:
                 aineInfo.setText("");
                 klassiInfo.setText("");
-            }
-        } else {
-            aineInfo.setText("");
-            klassiInfo.setText("");
+                break;
         }
     }
 

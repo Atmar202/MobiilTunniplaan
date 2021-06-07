@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button btn;
     int count, backgroundValue;
     List<String> spinnerItems;
-    private SharedPreferences mPrefs;
+    SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         count = spinner.getAdapter().getCount();
-        spinnerItems = new ArrayList<String>();
+        spinnerItems = new ArrayList<>();
         for(int i = 0; i < count; i++) {
             String text = spinner.getAdapter().getItem(i).toString();
             spinnerItems.add(text);

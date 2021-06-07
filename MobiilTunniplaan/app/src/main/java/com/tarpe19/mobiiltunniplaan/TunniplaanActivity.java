@@ -1,7 +1,6 @@
 package com.tarpe19.mobiiltunniplaan;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -11,10 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class TunniplaanActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView aineInfo, klassiInfo, aineInfo2, klassiInfo2, mealbreak, groupHeader;
     String selectionText;
+    String[] time = new String[]{"8:30 - 10:05", "10:10 - 11:45", "12:40 - 14:15"};
+    String[] subject = new String[]{"Inglise keel (agiilsed tarkvararaarenduse metoodikad)", "Ajalugu ja ühiskonnaõpetus", "Võrgurakendused"};
     Spinner spinner1, spinner2;
 
     @Override
@@ -45,11 +49,22 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
         String text = res.getString(R.string.groupText, selectionText);
         groupHeader.setText(text);
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch(position){
+                    // ained lisada läbi for tsükli
                     case 0:
-                        aineInfo.setText("8:30 - 10:55 Inglise keel (agii\nlsed tarkvaraarendused meto\nodikad)\n11:00 - 11:45 Ajalugu ja ühis\nkonnaõpetus");
+                        for(int i = 0; i < time.length; i++) {
+                            if(subject[i].length() > 25 && subject[i].substring(25).length() > 10) {
+                                aineInfo.append(time[i] + " " + subject[i].substring(0, 13) + "\n" + subject[i].substring(0, 30) + "\n" + subject[i].substring(30) + "\n");
+                            }
+                            else if(subject[i].length() > 10){
+                                aineInfo.append(time[i] + " " + subject[i].substring(0, 13) + "\n" + subject[i].substring(13) + "\n");
+                            } else {
+                                aineInfo.append(time[i] + " " + subject[i] + "\n");
+                            }
+                        }
                         klassiInfo.setText("B228 / Margit Uiboaid\n\n\nB238 / Silva Kiveste");
                         mealbreak.setText("11:50 - 12:35 Söögivahetund");
                         aineInfo2.setText("12:40 - 15:55 Võrguraken\ndused");
@@ -66,7 +81,7 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
                         aineInfo.setText("8:30 - 11:00 Andmebaasi\nsüsteemide alused");
                         klassiInfo.setText("A116 / Ingvar Deresivski");
                         mealbreak.setText("11:00 - 11:45 Söögivahetund");
-                        aineInfo2.setText("11:50 - 12:35 Inglise keel (agii\nlsed tarkvaraarendused meto\nodikad)\n12:40 - 14:15 Ajalugu ja ühis\nkonnaõpetus\nVõrguraken\ndused");
+                        aineInfo2.setText("11:50 - 12:35 Inglise keel (agii\nlsed tarkvaraarendused meto\nodikad)\n12:40 - 14:15 Ajalugu ja ühis\nkonnaõpetus\n14:20 - 15:55 Võrguraken\ndused");
                         klassiInfo2.setText("B228 / Margit Uiboaid\n\n\nB238 / Silva Kiveste\n\nA236 / Kristjan Kivikangur");
                         break;
                     case 3:
@@ -95,7 +110,11 @@ public class TunniplaanActivity extends AppCompatActivity implements AdapterView
 
     // Viib tagasi eelmisse activitysse
     public void onBack(View view) {
-        onBackPressed();
+        new AlertDialog.Builder(this)
+                .setTitle("Tagasi esilehele?")
+                .setMessage("Oled kindel, et soovid tagasi esilehele minna?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> onBackPressed()).setIcon(android.R.drawable.ic_dialog_alert).show();
     }
 
     public void onNextActivity(View view) {
