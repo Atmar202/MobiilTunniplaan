@@ -36,5 +36,6 @@
     <string-array name="chooseGroup">
         <item>Vali rühm:</item>
         <item>TARpe19</item>
+        <item>TARge19</item>
     </string-array>
 </resources>

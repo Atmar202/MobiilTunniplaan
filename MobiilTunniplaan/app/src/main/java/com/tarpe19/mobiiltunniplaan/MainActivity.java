@@ -9,13 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -74,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         Intent newActivity = new Intent(MainActivity.this, TunniplaanActivity.class);
                         newActivity.putExtra("STRING", spinnerItems.get(i));
                         startActivity(newActivity);
-                    } else {
-                        Toast.makeText(MainActivity.this, "Ei leia rühma.", Toast.LENGTH_SHORT).show();
+                        break;
                     }
                 }
             }
